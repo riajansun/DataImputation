@@ -6,7 +6,7 @@ import pandas as pd
 original_excel = r"MERGED DATA UPDATED (EVERYTHINGout).xlsx"
 imputed_excel = r"imputed_dataset_0.3.xlsx"
 
-# change the imputed file name to calculate the MAE and fractional error for KNN or MICE with 10%,20%,30% unknown data removed 
+# change the imputed file name to calculate the MAE and fractional error for KNN or MICE imputed data with 10%,20%,30% known data removed 
 
 # Read original and imputed CSV files
 original_data = pd.read_excel(original_excel)
