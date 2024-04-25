@@ -5,8 +5,8 @@ from scipy.stats import ks_2samp, ttest_ind
 import os
 
 # Load the original data and imputed data
-original_data_path = r'C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx'
-imputed_data_path = r'C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS\imputed_dataset_0.1.xlsx'
+original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+imputed_data_path = r'imputed_dataset_0.1.xlsx'
 
 # Read the original and imputed data
 df_original = pd.read_excel(original_data_path)
