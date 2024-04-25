@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.impute import KNNImputer
 
 # Load the dataset
-file_path = r"C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx"
+file_path = r"MERGED DATA UPDATED (EVERYTHINGout).xlsx"
 df = pd.read_excel(file_path)
 
 # Set a seed for reproducibility
