@@ -5,6 +5,11 @@ from scipy.stats import ks_2samp, ttest_ind
 import os
 
 # Load the original data and imputed data
+# for KNN
+original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+imputed_data_path = r'imputed_dataset_0.1.xlsx'
+
+#for mice
 original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
 imputed_data_path = r'imputed_dataset_0.1.xlsx'
 
