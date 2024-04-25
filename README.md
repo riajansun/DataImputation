@@ -1,8 +1,9 @@
-# Early Stratification of Neurological Outcomes in Cardiac Arrest Patients 
-# This study addresses the critical need for a reliable model to predict neurological and cognitive outcomes within the 6-hour window following cardiac arrest. The objective is to explore various imputation methods to construct a robust dataset for developing machine learning models aimed at predicting these outcomes. Two datasets from the International Cardiac Arrest Registry (INTCAR) of Maine underwent different imputation techniques, with the most effective method chosen based on statistical analyses such as KS-tests. Three imputation methods—multivariable imputation by chained equations (MICE), k-nearest neighbors (KNN), and mean mode imputation—were examined, and their accuracy was evaluated. The overall Mean Absolute Error (MAE) for KNN was higher than MICE , with corresponding overall percentage errors. Additionally, MICE exhibited higher p-values in KS-tests and t-tests for every variable tested. These findings highlight MICE imputation as the most accurate method, leading to the generation of an accurately imputed INTCAR dataset for utilization in the machine learning platform, thus enhancing the relevance of this study's outcomes.
+# Creating an imputed dataset to create a machine learning model for early stratification of neurological outcomes in cardiac arrest patients. 
+#  The overall goal of this project is to create a machine learning model for early stratification of neurological outcomes in cardiac arrest patients. The datasets utilized in this project were two datasets from the international cardiac arrest registry (INTCAR) of Maine Medical Center and a dataset from the electroencephalogram (EEG)-derived indices were used. These datasets contained missing variables that needed to be imputed to continue with the project. This code showcases the process of imputation and analyzing imputation methods. 
+
 #procedure: 
-# step 1 : use the given data and impute it using MICE and KNN then 10,20,30% known data is removed and the files are imputed again using KNN And mice 
-file 1- 10,20,30% removed data imputed with KNN : TO TAKE OUT 10,20,30%, SAVE MODIFIED FILE AND IMPUTE WITH KNN: code was used to remove 10% ,20% ,30% for known data and then it was imputed using KNN method of imputation.
+# step 1 : Use MICE and KNN to impute the Merged dataset at different levels of missingness. 
+Use file 1- 10,20,30% removed data imputed with KNN. This code uses the imputation method KNN to 
 
 file 2 -10,20,30% removed data imputed with MICE: TO TAKE OUT 10,20,30%, SAVE MODIFIED FILE AND IMPUTE WITH MICE: code was used to remove 10% ,20% ,30% for known data and then it was imputed using MICE method of imputation.
 
