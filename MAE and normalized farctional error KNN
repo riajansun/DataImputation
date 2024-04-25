@@ -1,0 +1,75 @@
+# TO CALCULATE MAE AND NORMALIZED FRACTIONAL ERROR
+
+import pandas as pd
+
+# Specify the file paths for the original and imputed CSV files
+original_excel = r"C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx"
+imputed_excel = r"C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS\imputed_dataset_0.3.xlsx"
+
+# Read original and imputed CSV files
+original_data = pd.read_excel(original_excel)
+imputed_data = pd.read_excel(imputed_excel)
+
+# Specify the columns to check
+columns_to_check = [
+    'BISi', 'SRi', 'BIS6', 'SR6', 'ABGpH', 'age', 'ambulate', 'aorticBalloon', 'arrythmia', 'BIS',
+    'cervascD', 'civilianCPR', 'civilianDefib', 'cogImpair', 'contissD', 'contNeuroMuscBlock', 'COPD',
+    'coronAngio', 'CPCprior', 'CPRmed', 'CTicu', 'CTsixH', 'deepSedation', 'defib', 'DNR', 'ECGresult',
+    'echoWithin12', 'EEGcont', 'EEGicu', 'glasgow', 'glucAdm', 'HCO3Adm', 'heartFail', 'height', 'hospCondition',
+    'hospTransfer', 'hypertension', 'ICUconditionAgit', 'ICUconditionAmb', 'ICUconditionCalm', 'ICUconditionDead',
+    'ICUconditionDisorient', 'ICUconditionNonamb', 'ICUconditionNoninteract', 'ICUconditionOrient', 'initRhythm',
+    'insulinDep', 'intermittentNeuroMuscBlock', 'lactateAdm', 'leukemia', 'lightSedation', 'liverD', 'LSwithdraw',
+    'majorBleed', 'maligTumor', 'MAP60', 'MAP60sustain', 'mechCD', 'minAmb', 'minArrestTilTargTemp', 'minCPRmed',
+    'minTilROSC', 'minTilROSCConfidence', 'MRIicu', 'myoclonus', 'myoInfarc', 'noninsulinDep', 'noSedation',
+    'obesity', 'obeyCommand', 'obeyCommandAdmission', 'openheartSurg', 'otherMechSupport', 'PaO2300', 'PaO260',
+    'PaO2min', 'percutCoronIntervention', 'perivascD', 'pneumonia', 'prevHealth', 'prophylacticAnticonvulsant',
+    'raiseArms', 'rankinPrior', 'rearrest', 'renalD', 'sedationForSeizure', 'seizureAfterTargTemp',
+    'seizureBeforeTargTemp', 'seizureDuringTargTemp', 'seizureGeneral', 'seizureNone', 'seizurePartial',
+    'seizureSubtle', 'sex', 'shiver', 'shock', 'smoker', 'spontBreath', 'SSEP', 'targTemp', 'targTempAchieved',
+    'targTempAdditional', 'targTempAdmin', 'targTempArrythmia', 'targTempAwoke', 'targTempBleed', 'targTempBrady',
+    'targTempError', 'targTempHDinstab', 'targTempInter', 'targTempRemoveLS', 'targTempSepsis', 'targTempStop',
+    'tempCTRLpostwarm', 'thrombolysis', 'vasopressors', 'weight', 'witnessed'
+]  # Modify this list as needed
+
+# Initialize lists to store results
+columns = []
+maes = []
+normalized_fractional_errors = []
+
+for column in columns_to_check:
+    # Convert the column values to numeric type
+    original_data[column] = pd.to_numeric(original_data[column], errors='coerce')
+    imputed_data[column] = pd.to_numeric(imputed_data[column], errors='coerce')
+
+    # Extract the column from the original and imputed datasets
+    original_column = original_data[column].copy()
+    imputed_column = imputed_data[column].copy()
+
+    # Replace NaN values in the original data with corresponding values from the imputed data
+    original_column.fillna(imputed_column, inplace=True)
+
+    # Calculate absolute error for each data point
+    absolute_errors = original_column - imputed_column
+
+    # Calculate Mean Absolute Error (MAE) for the column
+    mae = absolute_errors.abs().mean()
+
+    # Calculate the range of values for the column
+    value_range = original_column.max() - original_column.min()
+
+    # Calculate normalized fractional error for the column
+    normalized_fractional_error = mae / value_range
+
+    # Add results to the lists
+    columns.append(column)
+    maes.append(mae)
+    normalized_fractional_errors.append(normalized_fractional_error)
+
+# Create DataFrame from the lists
+results_df = pd.DataFrame({'Column': columns, 'Mean Absolute Error (MAE)': maes, 'Normalized Fractional Error': normalized_fractional_errors})
+
+# Export results to a CSV file
+results_excel = r"C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS\knn_error_results_0.3.xlsx"
+results_df.to_excel(results_excel, index=False)
+
+print("Results exported to:", results_excel)
