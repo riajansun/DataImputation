@@ -5,9 +5,21 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load the original data and imputed data for KNN and MICE
-original_data_path = r'C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx'
-knn_imputed_data_path = r'C:\Users\Yamee\Downloads\Imputation_Analysis\imputed_dataset_0.1k5(3-27).xlsx'
-mice_imputed_data_path = r'C:\Users\Yamee\Downloads\Imputation_Analysis\imputed_data_MICE_R.xlsx'
+# for 10% known data removed 
+original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+knn_imputed_data_path = r'imputed_dataset_0.1k5(3-27).xlsx'
+mice_imputed_data_path = r'imputed_data_MICE_R.xlsx'
+
+#for 20% known data removed 
+original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+knn_imputed_data_path = r"imputed_dataset_0.2_knn.xlsx"
+mice_imputed_data_path = r"imputed_data_0.20_mice.xlsx"
+
+#for 30% known data removed 
+original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+knn_imputed_data_path = r"imputed_dataset_0.3_knn.xlsx"
+mice_imputed_data_path = r"imputed_data_0.30_mice.xlsx"
+
 
 # Read the original and imputed data
 df_original = pd.read_excel(original_data_path)
