@@ -1,0 +1,9 @@
+# Calculate overall MAE for KNN
+knn_overall_mae = knn_data['Mean Absolute Error (MAE)'].mean()
+
+# Calculate overall MAE for MICE
+mice_overall_mae = mice_data['MAE'].mean()
+
+# Display the results
+print("\nOverall MAE for KNN:", knn_overall_mae)
+print("Overall MAE for MICE:", mice_overall_mae)
