@@ -3,11 +3,12 @@
 
 # procedure: 
 # step 1 : Use MICE and KNN to impute the Merged dataset at different levels of missingness. 
-Use file 1- 10,20,30% removed data imputed with KNN. This code uses the imputation method KNN to 
+Use file 1- 10,20,30% removed data imputed with KNN. This code uses the imputation method KNN to remove 10%, 20%, and 30% of known variables and then imputes. 
 
-file 2 -10,20,30% removed data imputed with MICE: TO TAKE OUT 10,20,30%, SAVE MODIFIED FILE AND IMPUTE WITH MICE: code was used to remove 10% ,20% ,30% for known data and then it was imputed using MICE method of imputation.
+use file 2 -10,20,30% removed data imputed with MICE.  This code uses the imputation method KNN to remove 10%, 20%, and 30% of known variables and then imputes. 
 
-# step 2: evaluate the imputed data.we used 4 different tests : KS test, T test ,MAE and fractional error to evaluate the data imputation methods.They were all compared with mean and mode as a control
+# step 2: evaluate the imputed data using KS test, T test, MAE, and normalized fractional error. 
+
 file 3:KS T test - KNN & MICE : TO CALCULATE KS&T TEST, SUMMARY STATISTICS : code was used to evaluate the KNN and mice imputation by calculating the KS test and T test.
 
 file 4:MAE and normalized fractional error KNN & MICE : TO CALCULATE MAE AND NORMALIZED FRACTIONAL ERROR : code was used to evaluate the KNN and MICE imputation by calculating the MAE and normalised fractional error.
