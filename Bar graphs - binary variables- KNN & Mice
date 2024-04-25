@@ -5,9 +5,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Define file paths
-original_data_path = r'C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx'
-knn_imputed_data_path = r"C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS\imputed_dataset_0.1_knn.xlsx"
-mice_imputed_data_path = r"C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS\imputed_data_0.1_mice.xlsx"
+original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+knn_imputed_data_path = r"imputed_dataset_0.1_knn.xlsx"
+mice_imputed_data_path = r"imputed_data_0.1_mice.xlsx"
 
 # Read the data
 original_data = pd.read_excel(original_data_path)
