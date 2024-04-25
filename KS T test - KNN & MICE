@@ -5,12 +5,15 @@ from scipy.stats import ks_2samp, ttest_ind
 import os
 
 # Load the original data and imputed data
-# for KNN
+
 original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
-imputed_data_path = r'imputed_dataset_0.1.xlsx'
+imputed_data_path = r'imputed_dataset_0.1_knn.xlsx'
 
+# file names for 10,20,30% known data for knn = imputed_dataset_0.1_knn.xlsx,imputed_dataset_0.2_knn.xlsx,imputed_dataset_0.3_knn.xlsx.
 
-# change the imputed file name to calculate the KS test and T test for KNN or MICE imputed data with 10%,20%,30% known data removed 
+# file names for 10,20,30% known data for mice = imputed_dataset_0.1_mice.xlsx,imputed_dataset_0.2_mice.xlsx,imputed_dataset_0.3_mice.xlsx.
+
+# change the appropriate imputed file name to calculate the KS test and T test for KNN and MICE imputed data with 10%,20%,30% known data removed 
 
 # Read the original and imputed data
 df_original = pd.read_excel(original_data_path)
