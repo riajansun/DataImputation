@@ -1,9 +1,9 @@
 # Creating an imputed dataset to create a machine learning model for early stratification of neurological outcomes in cardiac arrest patients. 
 #  The overall goal of this project is to create a machine learning model for early stratification of neurological outcomes in cardiac arrest patients. The datasets utilized in this project were two datasets from the international cardiac arrest registry (INTCAR) of Maine Medical Center and a dataset from the electroencephalogram (EEG)-derived indices were used. These datasets contained missing variables that needed to be imputed to continue with the project. This code showcases the process of imputation and analyzing imputation methods. 
 
-#This study aims to develop a dependable model for predicting neurological and cognitive outcomes following cardiac arrest within a critical 6-hour window. Using data from the International Cardiac Arrest Registry (INTCAR) of Maine, the study explores different imputation methods to create a strong dataset for machine learning models. Evaluating three methods—multivariable imputation by chained equations (MICE), k-nearest neighbors (KNN), and mean mode imputation—the study determines MICE as the most accurate. With MICE showing lower Mean Absolute Error (MAE) and higher p-values in statistical tests, it effectively generates a reliable dataset for machine learning applications, enhancing the study's significance.
+# This study aims to develop a dependable model for predicting neurological and cognitive outcomes following cardiac arrest within a critical 6-hour window. Using data from the International Cardiac Arrest Registry (INTCAR) of Maine, the study explores different imputation methods to create a strong dataset for machine learning models. Evaluating three methods—multivariable imputation by chained equations (MICE), k-nearest neighbors (KNN), and mean mode imputation—the study determines MICE as the most accurate. With MICE showing lower Mean Absolute Error (MAE) and higher p-values in statistical tests, it effectively generates a reliable dataset for machine learning applications, enhancing the study's significance.
 
-#procedure: 
+# procedure: 
 # step 1 : Use MICE and KNN to impute the Merged dataset at different levels of missingness. 
 Use file 1- 10,20,30% removed data imputed with KNN. This code uses the imputation method KNN to 
 
