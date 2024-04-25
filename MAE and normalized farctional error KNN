@@ -3,8 +3,8 @@
 import pandas as pd
 
 # Specify the file paths for the original and imputed CSV files
-original_excel = r"C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx"
-imputed_excel = r"C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS\imputed_dataset_0.3.xlsx"
+original_excel = r"MERGED DATA UPDATED (EVERYTHINGout).xlsx"
+imputed_excel = r"imputed_dataset_0.3.xlsx"
 
 # Read original and imputed CSV files
 original_data = pd.read_excel(original_excel)
