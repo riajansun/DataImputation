@@ -1,0 +1,58 @@
+#TO TAKE OUT 10,20,30%, SAVE MODIFIED FILE AND IMPUTE WITH KNN
+
+import os
+import pandas as pd
+import numpy as np
+from sklearn.impute import KNNImputer
+
+# Load the dataset
+file_path = r"C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx"
+df = pd.read_excel(file_path)
+
+# Set a seed for reproducibility
+np.random.seed(42)
+
+# Function to replace a given percentage of values in each column with NaN
+def introduce_missing_data(df, percentage_to_replace):
+    df_missing = df.copy()
+    for col in df_missing.columns:
+        mask = np.random.choice([True, False], size=len(df_missing[col]), p=[percentage_to_replace, 1 - percentage_to_replace])
+        df_missing.loc[mask, col] = np.nan
+    return df_missing
+
+# Define percentages to remove
+percentages_to_remove = [0.1, 0.2, 0.3]  # Adjust as needed
+
+# Identify binary and continuous column names
+binary_columns = ['ambulate', 'aorticBalloon', 'arrythmia', 'BIS', 'cervascD', 'civilianCPR', 'civilianDefib', 'cogImpair', 'contissD', 'contNeuroMuscBlock', 'COPD', 'coronAngio', 'CPCprior', 'CPRmed', 'CTicu', 'CTsixH', 'deepSedation', 'defib', 'DNR', 'ECGresult',  'EEGcont', 'EEGicu', 'heartFail', 'hospTransfer', 'hypertension', 'ICUconditionAgit', 'ICUconditionAmb', 'ICUconditionCalm', 'ICUconditionDead', 'ICUconditionDisorient', 'ICUconditionNonamb', 'ICUconditionNoninteract', 'ICUconditionOrient', 'insulinDep', 'intermittentNeuroMuscBlock', 'leukemia', 'lightSedation', 'liverD', 'LSwithdraw', 'majorBleed', 'maligTumor', 'MAP60', 'MAP60sustain', 'mechCD', 'MRIicu', 'myoclonus', 'myoInfarc', 'noninsulinDep', 'noSedation', 'obesity', 'obeyCommand', 'obeyCommandAdmission', 'openheartSurg', 'otherMechSupport', 'PaO2300', 'PaO260', 'percutCoronIntervention', 'perivascD', 'pneumonia', 'prevHealth', 'prophylacticAnticonvulsant', 'raiseArms', 'rankinPrior', 'rearrest', 'renalD', 'sedationForSeizure', 'seizureAfterTargTemp', 'seizureBeforeTargTemp', 'seizureDuringTargTemp', 'seizureGeneral', 'seizureNone', 'seizurePartial', 'seizureSubtle', 'sex', 'shiver', 'shock', 'smoker', 'spontBreath', 'SSEP', 'targTempAchieved', 'targTempAdmin', 'targTempArrythmia', 'targTempAwoke', 'targTempBleed', 'targTempBrady', 'targTempError', 'targTempHDinstab', 'targTempInter', 'targTempRemoveLS', 'targTempSepsis', 'targTempStop', 'tempCTRLpostwarm', 'thrombolysis', 'vasopressors', 'witnessed']
+continuous_columns = ['BISi', 'SRi', 'BIS6', 'SR6', 'ABGpH', 'age', 'CPCdischarge', 'echoWithin12', 'glasgow', 'glucAdm', 'HCO3Adm', 'height', 'hospCondition', 'initRhythm', 'lactateAdm', 'minAmb', 'minArrestTilTargTemp', 'minCPRmed', 'minTilROSC', 'minTilROSCConfidence', 'PaO2min', 'targTemp', 'targTempAdditional', 'weight']
+
+# Set K value for KNN imputation
+k = 5
+
+# Create a folder to save imputed datasets
+output_folder = r'C:\Users\Yamee\Downloads\EXTRA_IMPUTATION_ANALYSIS'
+os.makedirs(output_folder, exist_ok=True)
+
+for percentage_to_replace in percentages_to_remove:
+    # Introduce missing data
+    modified_data = introduce_missing_data(df, percentage_to_replace)
+    
+    # Save the modified dataset with missing values for each percentage
+    modified_file_path = os.path.join(output_folder, f'modified_dataset_{percentage_to_replace}.xlsx')
+    modified_data.to_excel(modified_file_path, index=False)
+    print(f"Modified dataset with {percentage_to_replace*100}% missing values saved to {modified_file_path}")
+
+    # Impute missing values using KNN with K=5
+    knn_imputer = KNNImputer(n_neighbors=k)
+    imputed_data = knn_imputer.fit_transform(modified_data)
+    
+    # Round binary values to 0 or 1 except for 'ABGpH' and 'lactateAdm'
+    imputed_data_rounded = np.round(imputed_data)
+    imputed_data_rounded[:, modified_data.columns.isin(['ABGpH', 'lactateAdm'])] = imputed_data[:, modified_data.columns.isin(['ABGpH', 'lactateAdm'])]
+   
+    # Save the imputed and rounded dataset to a new Excel file
+    output_file_path = os.path.join(output_folder, f'imputed_dataset_{percentage_to_replace}.xlsx')
+    pd.DataFrame(imputed_data_rounded, columns=modified_data.columns).to_excel(output_file_path, index=False)
+    
+    print(f"Imputed dataset for {percentage_to_replace*100}% missing values saved to {output_file_path}")
