@@ -1,0 +1,47 @@
+# Load required libraries
+library(mice)
+library(openxlsx)
+
+# Read the Excel file
+file_path <- "data_with_missing_values_MICE_R.xlsx"
+data <- read.xlsx(file_path, na.strings = c("", "NA", "NaN", "#N/A"))
+
+use the relevant code to impute data whilst removing 10,20 or 30% of known data 
+# Calculate the number of rows to remove (10% of total rows)
+rows_to_remove <- round(0.10 * nrow(data))
+
+# Calculate the number of rows to remove (20% of total rows)
+rows_to_remove <- round(0.20 * nrow(data))
+
+# Calculate the number of rows to remove (30% of total rows)
+rows_to_remove <- round(0.30 * nrow(data))
+
+# Randomly select rows to remove
+rows <- sample(1:nrow(data), rows_to_remove)
+
+# Set the selected rows to NA
+data[rows, ] <- NA
+
+# Impute missing values using mice
+imputed_data <- mice(data, method = "pmm", m = 5, maxit = 25)
+
+# Retrieve the completed dataset from mice
+completed_data <- complete(imputed_data)
+
+# use the appropriate output file path to save the files 
+
+# Define the output file path
+output_file_path <- "imputed_data_0.1_mice.xlsx"
+
+# for 20% known data removed and imputed
+output_file_path <- "imputed_data_0.2_mice.xlsx"
+
+# for 30% known data removed and imputed
+output_file_path <- "imputed_data_0.3_mice.xlsx"
+
+
+# Write the completed_data to an Excel file
+write.xlsx(completed_data, output_file_path, rowNames = FALSE)
+
+# Print confirmation message
+cat("Imputed dataset saved to", output_file_path, "\n")
