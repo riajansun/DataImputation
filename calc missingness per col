@@ -1,0 +1,14 @@
+#CALCULATE MISSINGNESS PER COLUMN
+
+import pandas as pd
+
+# Load your dataset
+# Replace 'your_dataset.csv' with the path to your dataset file
+df = pd.read_excel(r'C:\Users\Yamee\Downloads\MERGED DATA UPDATED (EVERYTHINGout).xlsx')
+
+# Calculate the missingness percentage for each column
+missing_percentage = df.isnull().mean() * 100
+
+# Save missingness percentage to an Excel file
+# Replace 'missingness_percentage.xlsx' with the desired file path and name
+missing_percentage.to_excel('missingness_percentage.xlsx', header=True)
