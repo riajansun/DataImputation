@@ -6,8 +6,18 @@ import matplotlib.pyplot as plt
 
 # Define file paths
 original_data_path = r'MERGED DATA UPDATED (EVERYTHINGout).xlsx'
+#for 10% known data removed 
 knn_imputed_data_path = r"imputed_dataset_0.1_knn.xlsx"
 mice_imputed_data_path = r"imputed_data_0.1_mice.xlsx"
+
+#for 20% known data removed
+knn_imputed_data_path = r"imputed_dataset_0.2_knn.xlsx"
+mice_imputed_data_path = r"imputed_data_0.2_mice.xlsx"
+
+#for 30% known data removed
+knn_imputed_data_path = r"imputed_dataset_0.3_knn.xlsx"
+mice_imputed_data_path = r"imputed_data_0.3_mice.xlsx"
+
 
 # Read the data
 original_data = pd.read_excel(original_data_path)
