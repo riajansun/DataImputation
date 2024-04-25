@@ -1,0 +1,95 @@
+import pandas as pd 
+
+import numpy as np 
+
+from sklearn.metrics import mean_absolute_error 
+
+  
+
+# Load original dataset 
+
+original_data_path = r'C:\Users\Yamee\Downloads\CODE & DATA\MERGED DATA UPDATED (patients&CPCdischarge out).xlsx' 
+
+original_df = pd.read_excel(original_data_path) 
+
+  
+
+# Define the percentage of known values to be replaced 
+
+percentage_to_replace = 0.1  # 10% 
+
+  
+
+# Calculate the number of known values to replace in each column 
+
+num_known_values_to_replace = int(len(original_df) * percentage_to_replace) 
+
+  
+
+# Step 1: Replace random 10% of known data from each column 
+
+modified_df = original_df.copy() 
+
+  
+
+for column in modified_df.columns: 
+
+    known_indices = modified_df[column].dropna().sample(num_known_values_to_replace).index 
+
+    modified_df.loc[known_indices, column] = np.nan 
+
+  
+
+# Step 2: Save the modified file 
+
+modified_data_path = r'C:\Users\Yamee\Downloads\COMPLETE IMPUTATION\modified_data_MM.xlsx' 
+
+modified_df.to_excel(modified_data_path, index=False) 
+
+print("Modified file saved to", modified_data_path) 
+
+  
+
+# Step 3: Impute the modified file using mean/mode 
+
+imputed_df = modified_df.copy() 
+
+  
+
+for column in imputed_df.columns: 
+
+    if imputed_df[column].dtype == 'object': 
+
+        # Impute missing values with mode for categorical columns 
+
+        mode_value = imputed_df[column].mode()[0] 
+
+        imputed_df[column].fillna(mode_value, inplace=True) 
+
+    else: 
+
+        # Impute missing values with mean for numerical columns 
+
+        mean_value = imputed_df[column].mean() 
+
+        imputed_df[column].fillna(mean_value, inplace=True) 
+
+  
+
+# Step 4: Round binary values to 0 or 1 
+
+binary_columns = [col for col in imputed_df.columns if imputed_df[col].dtype == 'int64' and imputed_df[col].nunique() == 2] 
+
+imputed_df[binary_columns] = imputed_df[binary_columns].applymap(lambda x: 1 if x >= 0.5 else 0) 
+
+  
+
+# Step 5: Save the imputed file 
+
+imputed_data_path = r'C:\Users\Yamee\Downloads\COMPLETE IMPUTATION\imputed_data_mean_mode.xlsx' 
+
+imputed_df.to_excel(imputed_data_path, index=False) 
+
+print("Imputed file saved to", imputed_data_path) 
+
+ 
